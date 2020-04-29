@@ -242,29 +242,107 @@
   + **tar** 是Linuz中最常用的**备份工具**，此命令可以把一系列文件**打包到一个大文件**中，也可以把一个打包的大文件**恢复成一系列文件**
     + tar -cvf 打包文件.tar 被打包的文件/路径。
     + tar -xvf 打包文件.tar **解包命令**
-
   + **tar与gzip**命令结合可以使用实现文件的**打包和压缩**
     + tar 只负责打包文件，但不压缩
     + 用gzip压缩tar打包后的文件，扩展名一般用 xxx.**tar.gz**
-
   + **tar -czvf 打包文件.tar.gz 被压缩的文件/路径**
   + **tar -xzvf 打包文件.tar.gz**
   + **tar -zxvf 打包文件.tar.gz -C 目标路径**
-+ 远程命令
 
-  + **shut down**
-    + 一分钟之后关闭电脑
-  + **shut down -r**
-    + 一分钟之后重启
-  + **shut down -r now**
-    + 立刻重启
-+ **shut down -c**
+## 其他命令
+
++ **查找文件**
+  + `find` 路径 -name "filename"
+  + 不加路径默认是当前路径
++ **软连接**
+  + 类似快捷方式
+  + ln -s 源文件`完整路径` 链接文件名
+  + 如果使用相对路径，当连接文件移动之后，连接就会失效
++ **打包压缩**
+  + **可以使用通配符**
+  + 打包
+    + tar -cvf 打包文件.tar 路径
+    + tar -xvf 打包文件.tar
+  + 压缩
+    + tar -zcvf  打包文件.tar.gz 文件路径
+    + tar -zxvf 打包文件.tar.gz -C 目标路径
+
+## 远程管理命令
+
++ `shut down`
+  + **一分钟之后关闭电脑**
++ `shut down -r`
+  + 一分钟之后重启
++ `shut down -r now`
+  + 立刻重启
++ `shut down -c`
     + 取消关机命令
-  + **reboot**
+  + `reboot`
+
+- `网卡`
+
+  - 专门负责网络通讯的**硬件设备**
+
+- `ip地址`
+
+  - 设置在网卡上的地址信息
+
+- `ifconfig`
+
+  - 查看计算机当前的**网卡配置信息**
+
+- `ping`
+
+  - 检测到**目标ip**地址的链接是否正常
+  - 检测**本地网卡**是否工作正常
+    - ping 127.0.0.1
+
+- `ssh`
+
+  - **secure shell**
+
+    - 数据传输是加密和压缩的
+
+  - `域名`
+
+    - DNS解析，把ip地址解析成域名
+
+  - `端口号`
+
+    - 通过端口号，可以找到计算机中的**程序**
+
+    - | 序号 | 服务      | 端口 |
+      | ---- | --------- | ---- |
+      | 01   | SSH服务器 | 22   |
+      | 02   | Web服务   | 80   |
+      | 03   | HTTPS     | 443  |
+      | 04   | FTP服务器 | 21   |
+
+  - 简单使用
+
+    - **sudo apt install openssh-server**
+    - **ssh [-p port] user@remote**
+
+  - 无密码ssh另一台主机
+
+    - ssh-keygen
+    - ssh-copy-id -i .ssh/id_rsa.pub 用户名@ip地址
+    - ssh user@remote
+
+- `scp`
+
+  - **secure copy**
+  - scp -P port 01.py user@remote:Desktop/01.py
+    - 拷贝文件
+  - scp -P port user@remote:Desktop/01.py  01.py
+  - scp -r demo user@remote:Desktop
+    - 拷贝文件夹
+
+
 
 ## 用户权限
 
-+ ls-l
++ `ls-l`
   + **r** 可读
   + **w** 可写
   + **x** 可执行
@@ -272,23 +350,24 @@
   + 中间三个 **组内者**   权限
   + 最后三个  **其他用户** 权限
 
-+ chmod
++ `chmod`
 
   + chmod +(-)r(w\x) file
-  + 如果文件夹没有可执行权限，则无法查看文件夹内的信息，ls cd命令都会失效 
+    + 如果文件夹没有**可执行权限**，则无法查看文件夹内的信息，ls cd命令都会失效 
+    + 没有可读权限的话，没法使用ls命令
 
   + chmod u+r t1.py
     - user对于t1.py加上可读的权限
 
   - chmod u-r t1.py
     - user对于t1.py去掉可读的权限
-
   - chmod g+r t1.py
   - chmod a+r t1.py
+  - 还可以使用数字进行修改权限
 
-+ 组管理
-  + sudo groupadd
-  + sudo  groupdel
++ `组管理`
+  + `sudo groupadd`
+  + `sudo  groupdel`
   + cat /etc/group   查看是否成功
   + chgrp -R dev Python学习/
     + 递归的改变文件所属的组
@@ -298,20 +377,16 @@
   + **sudo useradd -m -g**
     + -m 自动建立用户家目录
     + -g 指定用户所在的组
-
   + **sudo passwd 用户名**
     + 设置用户密码
-
   + userdel -r 用户名
     + -r 自动删除用户家目录
-
-  + who
+  + `who`
 
     + 当前登录的所有用户
-
-  + whoami
-
-  + su 切换用户
+  + `whoami`
+    + 打印用户名
+  + `su 切换用户`
 
     + su 用户名
 
@@ -319,9 +394,9 @@
 
 ## 系统信息
 
-+ date
++ `date`
   + 查看系统时间
-+ cal
++ `cal`
   + 日历（一月）
   + cal -y 全年
 + `df -h`
@@ -329,18 +404,18 @@
 + `du -h`
   + 显示目录下的文件大小
 + 进程
+  + 程序和进程的区别
   + `ps`  process status  进程状态
     + `ps aux`    查看进程的详细状态
     + ps au  `常用这个命令`
-  + `top`  动态显示进程的信息 `q退出`
-  + `kill` 终止指定代号的进程 [-9] 强制停止
+  + `top`  
+    + 动态显示进程的信息 
+    + 3s刷新一次
+    + `q退出`
+  + `kill` 
+    + 终止指定代号的进程
+    + [-9] 强制停止
     + kill -9 pid
-  + 把一个进程放置到后台执行
-    + process &
-    + 可以使用jobs命令进行查看
-    + 这个时候就不能使用ctrl+c进行终止程序了
-    + bg %任务序号  前台移到后台
-  + 进程返回到前台 fg %任务序号
 + **service**
   + 用来查看服务状态的指令
   + service  (空格)--status -all
@@ -349,65 +424,6 @@
   + service 服务名　stop
   + service 服务名　restart
   + service 服务名　status
-
-## 远程管理
-
-+ `网卡`
-  
-+ 专门负责网络通讯的硬件设备
-  
-+ `ip地址`
-  
-+ 设置在网卡上的地址信息
-  
-+ `ifconfig`
-  
-  + 查看计算机当前的**网卡配置信息**
-+ `ping`
-  + 检测到**目标ip**地址的链接是否正常
-  + 检测本地网卡是否工作正常
-    + ping 127.0.0.1
-
-+ `ssh`
-
-  + **secure shell**
-
-  + 数据传输是加密和压缩的
-
-  + `域名`
-
-    + DNS解析，把ip地址解析成域名
-
-  + `端口号`
-
-    + 通过端口号，可以找到计算机中的**程序**
-
-    + | 序号 | 服务      | 端口 |
-      | ---- | --------- | ---- |
-      | 01   | SSH服务器 | 22   |
-      | 02   | Web服务   | 80   |
-      | 03   | HTTPS     | 443  |
-      | 04   | FTP服务器 | 21   |
-
-  + 简单使用
-    
-    + **sudo apt install openssh-server**
-    + **ssh [-p port] user@remote**
-    
-  + 无密码ssh另一台主机
-
-    + ssh-keygen
-    + ssh-copy-id -i .ssh/id_rsa.pub 用户名@ip地址
-    + ssh user@remote
-
-+ `scp`
-
-  + **secure copy**
-  + scp -P port 01.py user@remote:Desktop/01.py
-    + 拷贝文件
-  + scp -P port user@remote:D esktop/01.py  01.py
-  + scp -r demo user@remote:Desktop
-    + 拷贝文件夹
 
 ## 定时任务
 
