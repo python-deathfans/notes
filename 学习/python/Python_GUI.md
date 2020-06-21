@@ -3,11 +3,9 @@
 ### 一、原理分析
 
 + side=top 空间布局
-  + ![](C:\Users\包志龙\Desktop\常用\file\mark down笔记\图片\Snipaste_2020-03-27_12-11-15.png)
-
+  + ![](https://pic.downk.cc/item/5ec8dc22c2a9a83be5b995d2.png)
 + side=left 空间布局
-  + ![](C:\Users\包志龙\Desktop\常用\file\mark down笔记\图片\Snipaste_2020-03-27_12-11-56.png)
-
+  + ![](https://pic.downk.cc/item/5ec8dbe8c2a9a83be5b9478b.png)
 + **容器可用空间**
   + 系统严格按代码的**前后组织**顺序依次排列组件，前辈组件还没有占据的空间，是当前组件的可用空间，pack布局是在当前组件的可用空间内进行的
 + **组件原始可见空间**
@@ -28,7 +26,7 @@
   + 锚定位有**9**个方向，缺省为 **center**, **居中**
   + 若 side = **top / bottom** ,  **expand=no**, 则合并到**一行**，即**NW, W, SW**的效果一样，其他同理。
   + 若 side = **left / right**,  **expand = no**, 则合并到**一列**，即**NW, N, NE**的效果一样，其他同理
-  + ![](C:\Users\包志龙\Desktop\常用\file\mark down笔记\图片\Snipaste_2020-03-27_14-33-04.png)
+  + ![](https://pic.downk.cc/item/5ec8dcb5c2a9a83be5ba6cdc.png)
 + **空间优先级**
   + 界面空间 > 前辈组件独占空间 > 后辈组件独占空间 > 前辈组件可扩展空间 > 后辈组件可扩展空间
 + 可以利用**frame**的多层嵌套进行灵活布局
