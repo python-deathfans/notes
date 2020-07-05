@@ -49,10 +49,8 @@ git config --global user.email ""
 
 + 多个并行作业时，需要用到分支。**master分支**是Git默认创建的分支，所有开发都是基于这个分支的
 + ![](https://pic.downk.cc/item/5eeff56214195aa594255374.png)
-
 + 不同的分支可以完成完全不同的工作，最后进行分支合并。合并到master分支
 + ![](https://pic.downk.cc/item/5eeff71314195aa59426784f.png)
-
 + **git branch**
   + 显示当前仓库的分支，左侧带有*****的是当前所在的分支
 + **git branch branch-a**
@@ -63,3 +61,6 @@ git config --global user.email ""
   + 创建并切换到分支a
 + **git merge --no-off feature-A**
   + 把A分支合并到master分支，前提是已经切换到了master分支
++ 修改别名
+  + git config --global alias.psm "push origin master"
+  + git config --global alias.ci "commit"
