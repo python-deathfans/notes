@@ -31,6 +31,8 @@
   + 1， 表示列
 + `thresh`
   + 代表删除之后还剩下的数量
++ `subset`
+  + 传入一个list,代表删除list中的含有空值的行
 
 ### fillna()
 
@@ -69,7 +71,46 @@
   + `bins`:1, 整数--将x划分为`多少个等间距`的区间
   + `right`:是否包含右端点
 
-## jieba 词云
+## Series中的map函数
+
++ 接收一个`函数`或者含有映射关系的`字典对象`
+
+GroupBy函数
+
++ `size函数`
+  + 返回一个Series对象
+  + index是聚合的结果
+  + value是每个index对应的值
+
+## pd.merge()
+
+> pd.merge(left, right, how='inner', on=None, left_on=None, right_on=None,         left_index=False, right_index=False, sort=True,         suffixes=('_x', '_y'), copy=True, indicator=False,         validate=None)
+
++ left
+  + 左侧拼接对象
++ right
+  + 右侧拼接对象
++ `on`
+  + 要加入的列或索引级别名称
+  + 必须在左侧和右侧DataFrame对象中找到
++ `how`
+  + One of ‘`left`’, ‘`right`’, ‘`outer`’, ‘`inner`’. 默认inner。`inner是取交集`，`outer取并集`。比如left：[‘A’,‘B’,‘C’];right[’'A,‘C’,‘D’]；inner取交集的话，left中出现的A会和right中出现的买一个A进行匹配拼接，如果没有是B，在right中没有匹配到，则会丢失。'outer’取并集，出现的A会进行一一匹配，没有同时出现的会将缺失的部分添加缺失值。
+
+## pd.melt()
+
+> 数据分析的时候经常要把`宽数据--->>长数据`，有点像你们用excel 做透视跟逆透视的过程
+>
+> pandas.melt(frame,id_vars=None,value_vars=None,var_name=None,value_name='value',    col_level=None)
+
++ `frame`
+  + 需要处理的数据集
++ `id_vars`
+  + 不需要转换的列名
++ `value_vars`
+  + 需要转换的列名，如果剩下的列全部都要转换，就不用写了
++ `var_name`和`value_name`是自定义设置对应的列名
+
+
 
 
 
