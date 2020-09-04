@@ -67,9 +67,64 @@
   + 减小卷积核的大小、去除池化层、增加丢失层和融合SE模块
   + 研究网络层深对于精度的影响
 
-## 04 Expression Recognition Method Based on a Lightweight Convolutional Neural Network
+## 04 Lightweight Deep Learning Model For Facial Expression Recognition
+
+> 虽然现有的复杂的深度学习模型可以达到很高的精度，但是对于`资源受限`的设备，如`物联网设备 、移动端设备`，计算成本太高。
+>
+> 虽然有一些工作试图通过`缩小模型`的大小来降低模型的复杂性，但是由于`简单模型无法学习复杂的特征`，因此模型的性能会受到很大的影响。因此，在尽可能保持DNN模型检测性能的同时，提出了一些减小DNN模型规模的方法
+
+`MobileNetV1`采用了`深度可分离的卷积`，以减小模型的大小并加快模型的速度。
+
+ `inverted residual structure architecture` called `MobileNetV2`
+
+本文基于`MobileNetV2`
+
+### 网络结构
+
+![](https://pic.downk.cc/item/5f4f457a160a154a67e0a048.png)
 
 
 
++ `Inception Block`
+  + 采用不同尺寸的卷积核大小，避免特征丢失
++ `bottlenecks`
+  + build on inverted residual blocks
+  + `减少非线性运算`
+  + 深度可分离卷积
+    + MobileNetV1
+    + depthwise convolutions
+    + pointwise convolutions
+  + Inverted residual with the linear bottleneck method
+    + MobileNetV2
++ `fully connected layer`
 
+### 实验部分
 
+HYPER-PARAMETERS FOR DA TA AUGMENTA TION
+
+| hyperparameters | values  |
+| --------------- | ------- |
+| rescale         | 1./255  |
+| shear_range     | 0.2     |
+| fill_mode       | nearest |
+| horizontal_flip | True    |
+| vertical_flip   | True    |
+
+HYPER-PARAMETERS FOR MODEL TRAINING
+
+| hyperparameters  | values      |
+| ---------------- | ----------- |
+| batch_size       | 16          |
+| input_size       | 224, 224, 3 |
+| optimization     | Adam        |
+| epochs           | 200         |
+| steps_per_epoch  | 256         |
+| validation_steps | 64          |
+
++ 数据集
+
+  + CK+
+
++ 数据增强
+
+  

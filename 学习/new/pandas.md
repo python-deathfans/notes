@@ -65,11 +65,12 @@
 
 ## pd.cut()
 
-+ 将数据进行离散化
++ 将数据进行`离散化`
 + pandas.**cut**(x,bins,right=True,labels=None,retbins=False,precision=3,include_lowest=False)
   + `x`:进行划分的一维数组
   + `bins`:1, 整数--将x划分为`多少个等间距`的区间
   + `right`:是否包含右端点
+  + `labels`:对应区间的标签
 
 ## Series中的map函数
 
@@ -110,7 +111,50 @@ GroupBy函数
   + 需要转换的列名，如果剩下的列全部都要转换，就不用写了
 + `var_name`和`value_name`是自定义设置对应的列名
 
+## df.nunique()
 
++ 统计某个Series中`不重复的个数`
 
+## 修改列名
 
++ df.`rename`(columns={'oldname': 'newname'}, inplace=True)
+
+## 添加一行数据
+
++ df.`append`(data, ignore_index=True)
+
+## 合并数据
+
++ df.`concat`([data1, data2], axis=0, ignore_index=True)
+  + 按照行进行合并
+  + 不考虑数据的索引
+
+## agg函数
+
+DataFrame.agg（func，axis = 0,*args, **kwargs）
+
++ func
+  + 函数，函数名称，`函数列表`，`字典`
++ 使用指定轴上的一个或者多个操作进行聚合
+
+## 数据交换
+
+```python
+cols = df.columns[[0,2,1,3,4,5,6]]
+df1 = df[cols]
+df1
+```
+
+## 数据拆分
+
+```python
+# expand=True, 将结果转换成DataFrame,并且索引和原来的df一样，可以使用pd.merge进行合并
+df['技能要求'].str.split(',',expand=True)
+```
+
+## 数据抽样
+
+```python
+df.sample(20)
+```
 
