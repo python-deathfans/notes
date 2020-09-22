@@ -12,6 +12,94 @@
     + `radius`：扇区圆心角展现数据的百分比，半径展现数据的大小
     + `area`：所有扇区圆心角相同，仅通过半径展现数据大小
 
+### 环形饼状图
+
+```python
+x_data = Faker.choose()
+y_da = Faker.values().sort()
+
+pie = (
+    Pie(init_opts=opts.InitOpts(theme='dark'))
+    .add("", [list(z) for z in zip(x_data, y_data)], radius=['40%', '60%'])
+    .set_global_opts(
+        legend_opts=opts.LegendOpts(orient='vertical', pos_top='15%', pos_left='2%'),
+        toolbox_opts=opts.ToolboxOpts()
+    )
+    .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {d}%"))
+)
+
+pie.render_notebook()
+```
+
+![](https://pic.downk.cc/item/5f58308b160a154a67d1e517.png)
+
+### 玫瑰图
+
+```python
+x_data = Faker.choose()
+y_da = Faker.values().sort()
+
+pie = (
+    Pie(init_opts=opts.InitOpts(theme='dark'))
+    .add("", [list(z) for z in zip(x_data, y_data)], radius=['35%', '75%'], rosetype='radius')
+    .set_global_opts(
+        legend_opts=opts.LegendOpts(orient='vertical', pos_top='15%', pos_left='2%'),
+        toolbox_opts=opts.ToolboxOpts()
+    )
+    .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {d}%"))
+)
+
+pie.render_notebook()
+```
+
+![](https://pic.downk.cc/item/5f583193160a154a67d2143b.png)
+
+### 多饼图
+
+```python
+pie=(
+    Pie(init_opts=opts.InitOpts(theme='dark'))
+        .add(
+            "",
+            [list(z) for z in zip(["剧情", "其他"], [25, 75])],
+            center=["20%", "30%"],
+            radius=[40, 60],
+        )
+        .add(
+            "",
+            [list(z) for z in zip(["奇幻", "其他"], [24, 76])],
+            center=["55%", "30%"],
+            radius=[40, 60],
+        )
+        .add(
+            "",
+            [list(z) for z in zip(["爱情", "其他"], [14, 86])],
+            center=["20%", "70%"],
+            radius=[40, 60],
+        )
+        .add(
+            "",
+            [list(z) for z in zip(["惊悚", "其他"], [11, 89])],
+            center=["55%", "70%"],
+            radius=[40, 60],
+        )
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Pie-多饼图基本示例"),
+            legend_opts=opts.LegendOpts(
+                type_="scroll", pos_top="center", pos_left="80%", orient="vertical"
+            ),
+            toolbox_opts=opts.ToolboxOpts()
+        )
+        .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}"))
+    )
+
+pie.render_notebook()
+```
+
+![](https://pic.downk.cc/item/5f583418160a154a67d2860d.png)
+
+
+
 ## 下载图片
 
 ```python
@@ -36,35 +124,32 @@ bar.render_notebook()
 ## TimeLine()
 
 ```python
-from pyecharts.charts import Bar, Timeline
-import pyecharts.options as opts
-import random
+begin = datetime.date(2020, 4, 1)
+end = datetime.date(2020, 4, 20)
 
-# 示例数据
-cate = ['Apple', 'Huawei', 'Xiaomi', 'Oppo', 'Vivo', 'Meizu']
+x_data = Faker.choose()
 
-timeline = Timeline()
+def get_random_data(n):
+    return list(random.randint(100, 200) for _ in range(n))
 
-for i in range(2015, 2020):
-    bar = Bar()
+tl = Timeline()
+tl.add_schema()
 
-    bar.add_xaxis(cate)
-    bar.add_yaxis("线上", [random.randint(50, 150) for _ in cate])
-    bar.add_yaxis("线下", [random.randint(50, 150) for _ in cate])
-    bar.set_global_opts(
-        title_opts=opts.TitleOpts(f"手机品牌{i}年营业额"),
-        toolbox_opts=opts.ToolboxOpts()
+for i in range((end-begin).days+1):
+    day = begin+datetime.timedelta(days=i)
+    
+    bar = (
+        Bar()
+        .add_xaxis(x_data)
+        .add_yaxis("online", get_random_data(len(x_data)))
     )
-    bar.set_series_opts(
-        label_opts=opts.LabelOpts(is_show=False),
-        markpoint_opts=opts.MarkPointOpts(
-            data=[opts.MarkPointItem(type_='max'), opts.MarkPointItem(type_='min')]
-        )
-    )
-    timeline.add(bar, f"{i}年")
-
-timeline.render()
+    
+    tl.add(bar, day)
+   
+tl.render_notebook()
 ```
+
+
 
 ## Faker类
 
@@ -187,5 +272,10 @@ bar.render()
 + title_textstyle_opts=opts.TextStyleOpts(font_size=30)
 + title_textstyle_opts=opts.TextStyleOpts(font_family="serif")
 
-## 网格线配置项 SplitLineOpts
+## Faker模块
 
++ Faker.choose
+  + ![](https://pic.downk.cc/item/5f557839160a154a673b7ff5.png)
+
++ Faker.values()
+  + ![](https://pic.downk.cc/item/5f557874160a154a673b877f.png)
