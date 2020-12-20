@@ -116,3 +116,126 @@ IN操作符完成了OR的功能。
 + IN操作符语法更清楚
 + IN操作符求值顺序更容易管理
 + 操作速度比OR要快
+
+### 用通配符进行过滤
+
+> + 不要过度使用通配符，检索效率比较低
+
++ **LIKE**操作符
+  + **%** 
+    + **任何字符出现任何次数**
+    + SELECT prod_id, prod_name FROM products WHERE prod_name LIKE 'F%'
+    + ACCESS中使用的是*
+  + **_**
+    + 匹配**单个字符**
+  + **[]**
+    + 用来**指定一个字符集**，必须匹配指定位置的一个字符
+  + **^**
+    + 用来表示**否定**
+    + 也可以使用**NOT**关键字表示否定。
+
+### 创建计算字段
+
++ 拼接字段
+  + **+**进行拼接多个字段
++ 使用别名
+  + **AS**关键字
++ 执行运算
+  + SELECT 2*3;
+  + SELECT NOW();
+  + SELECT TRIM('abc');
+
+------
+
+
+
+## 汇总数据
+
+### 聚集函数
+
+- AVG()
+  - ![](https://pic.downk.cc/item/5fc9d8ba394ac52378ff7aa1.png)
+- COUNT()
+  - 确定表中行的数目或符合特定条件的列的数目
+  - 两种用法
+    - COUNT(*)
+      - 对表中的所有行进行计数，**不管行中包含的是NULL还是非NULL**
+    - COUNT(COLUMN)
+      - 对特定列中具有值的行进行计数，**忽略NULL值**
+- MAX()
+- MIN()
+- SUM()
+
+对**某些行**运行的函数，计算并返回一个值。
+
+## 分组数据
+
+涉及两个新SELECT 语句子句：
+
++ GROUP BY
++ HAVING子句
+
+### 创建分组
+
+分组是使用SELECT语句的GROUP BY子句创建的。
+
+![](https://pic.downk.cc/item/5fc9db8f394ac52378020ef2.png)
+
+### 过滤分组
+
+HAVING 非常类似于WHERE子句。唯一的差别是WHERE过滤行，HAVING过滤分组。
+
+![](https://pic.downk.cc/item/5fc9ddce394ac523780553f7.png)
+
+
+
+### 分组和排序
+
+ORDER BY子句放在SQL语句最后。
+
+### SELECT 子句顺序
+
+SELECT	要返回的列或者表达式
+
+FROM	检索的表
+
+WHERE	行级过滤
+
+GROUP BY	分组说明
+
+HAVING	分组过滤
+
+ORDER BY	输出排序顺序
+
+## 使用子查询
+
+子查询
+
++ 嵌套在其他查询中的查询
++ ![](https://pic.downk.cc/item/5fc9e390394ac523780a6ed1.png)
+
++ 子查询总是子内向外
+
+## 联结表
+
+联结(**join**)表。
+
+联结是SQL中一个**最重要、最强大的特性**，有效地使用联结需要对关系数据库设计有基本的了解。
+
+关系表的设计就是要把信息分解成多个表，一类数据一个表。各表通过某些共同的值相互关联，所以才叫关系型数据库。
+
+![](https://pic.downk.cc/item/5fcb2465394ac52378340605.png)
+
+如果没有**WHERE语句**，则进行的是**笛卡儿积**，最后的结果是两张表的行数之积。
+
+### 内联结
+
+inner join。
+
+SELECT vend_name, prod_name, prod_price FROM vendors INNER **JOIN** products
+
+**ON** vendors.vend_id=products.vend_id
+
++ 这里，两个表之间的关系是以**INNER JOIN**指定的部分FROM子句。在使用这种语法时，联结条件用特定的**ON**子句而不是WHERE子句给出。
+
+联结的时候可以使用多种语法，一种是**SELECT FROM WHERE**,另一种是**SELECT FROM JOIN ON**。。。

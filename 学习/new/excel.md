@@ -15,3 +15,10 @@
 + AVERAGEA
 + AVERAGEIF
 + AVERAGEIFS
+
+## 数据透视表
+
+### 基本知识
+
++ 定义
+  + 把明细表分类汇总的过程
