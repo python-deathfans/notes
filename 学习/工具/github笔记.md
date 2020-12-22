@@ -128,3 +128,12 @@
   + git branch -d develop
     + 删除本地分支
 
+## 知识补充
+
+![](https://pic.downk.cc/item/5fe16eb33ffa7d37b316bb75.png)
+
++ **git branch**
+  + 查看当前所在分支并显示所有分支
++ **git branch -a**
+  + 显示本地仓库与远程仓库的所有分支
+
